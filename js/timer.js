@@ -7,7 +7,8 @@ function setTime() {
   const 분 = 흐른시간.getMinutes().toString().padStart(2, "0");
   const 초 = 흐른시간.getSeconds().toString().padStart(2, "0");
   const timeH1 = document.querySelector(".timer");
-  timeH1.innerText = `${분}:${초}`;
+  timeH1.innerText = `time : ${분}:${초}`;
 }
 
+//주기성
 setInterval(setTime, 1000);
