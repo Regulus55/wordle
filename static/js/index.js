@@ -1,5 +1,3 @@
-const 정답 = "APPLE";
-
 let index = 0;
 let attempts = 0;
 let timer;
@@ -35,18 +33,29 @@ function appStart() {
     index = 0;
   };
 
-  const handleEnterKey = () => {
+  const handleEnterKey = async () => {
     let 맞은갯수 = 0;
+
+    //서버에서 정답을 받아오는 코드
+    const 응답 = await fetch("/answer");
+    const 정답 = await 응답.json();
+    // const 정답객체 = await 응답.json();
+    // const 정답 = 정답객체.answer;   // answer를 객체로 받을때
 
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-block[data-index='${attempts}${i}']`
       );
+      // const keyboardBlock = document.querySelector(
+      //   `.key-block[data-key='${event.key.toUpperCase()}']`
+      // );
+
       const 입력글자 = block.innerText;
       const 정답글자 = 정답[i];
       if (입력글자 === 정답글자) {
         맞은갯수++;
         block.style.background = "#6aaa64";
+        // keyboardBlock.style.background = "#6aaa64";
       } else if (정답.includes(입력글자)) block.style.background = "#c9b458";
       else block.style.background = "#787c7e";
       block.style.color = "white";
@@ -64,7 +73,7 @@ function appStart() {
 
     if (event.key === "Backspace") handleBackspace();
     else if (index === 5) {
-      if (event.key === "Enter") handleEnterKey();
+      if (event.key === "Enter") handleEnterKey(event);
       else return;
     } else if (65 <= keyCode && keyCode <= 90) {
       thisBlock.innerText = key;
