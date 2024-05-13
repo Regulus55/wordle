@@ -36,9 +36,12 @@ function appStart() {
   const handleEnterKey = async () => {
     let 맞은갯수 = 0;
 
+    const 정답 = "NIGHT";
+
     //서버에서 정답을 받아오는 코드
-    const 응답 = await fetch("/answer");
-    const 정답 = await 응답.json();
+    // const 응답 = await fetch("/answer");
+    // const 정답 = await 응답.json();
+
     // const 정답객체 = await 응답.json();
     // const 정답 = 정답객체.answer;   // answer를 객체로 받을때
 
